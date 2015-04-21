@@ -35,7 +35,7 @@ gulp.task('watch', function() {
 
 gulp.task('add-proxy', function() {
     return replace({
-        regex: "http://localhost:3000/api/endpoint",
+        regex: "https://ioniccorsdemoapi.herokuapp.com/api/endpoint",
         replacement: "http://localhost:8100/api/endpoint",
         paths: replaceFiles,
         recursive: false,
@@ -46,7 +46,7 @@ gulp.task('add-proxy', function() {
 gulp.task('remove-proxy', function() {
     return replace({
         regex: "http://localhost:8100/api/endpoint",
-        replacement: "http://localhost:3000/api/endpoint",
+        replacement: "https://ioniccorsdemoapi.herokuapp.com/api/endpoint",
         paths: replaceFiles,
         recursive: false,
         silent: false
