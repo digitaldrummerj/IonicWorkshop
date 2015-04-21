@@ -1,6 +1,9 @@
 var express = require('express')
 var app = express()
 
+app.set('port', (process.env.PORT || 3000));
+app.use(express.static(__dirname + '/public'))
+
 var result = {
   "success": "true",
   "data": [
@@ -17,12 +20,17 @@ var result = {
       "title": "CEO"
     }
   ]
-}
+};
 
 app.get('/api/endpoint', function(req, res) {
-  res.send(result)
-  console.log('Got a request from host:', req.hostname, 'Origin:', req.headers.origin)
-})
+  res.send(result);
+  console.log('Got a request from host:', req.hostname, 'Origin:', req.headers.origin);
+});
 
-app.listen(3000);
-console.log('Listening on port', 3000)
+app.get('/', function(request,response) {
+    response.send('Hello World');
+});
+
+app.listen(app.get('port'), function() {
+    console.log('Listening on port:' + app.get('port'));
+});
