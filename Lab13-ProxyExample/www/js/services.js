@@ -1,10 +1,10 @@
 angular.module('starter.services', [])
-    .factory('Api', function($http, $q) {
+    .factory('Api', function($http, $q, ApiEndpoint) {
 
         var getApiData = function() {
             var q = $q.defer();
 
-            $http.get('/api/endpoint')
+            $http.get(ApiEndpoint.url)
                 .success(function(data) {
                     console.log('Got some data: ', data)
                     q.resolve(data);

@@ -6,6 +6,10 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+    .constant('ApiEndpoint', {
+      //  url: 'http://localhost:3000/api/endpoint'
+        url: "http://christophers-macbook-pro.local:3000/api/endpoint"
+    })
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

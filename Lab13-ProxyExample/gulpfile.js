@@ -6,10 +6,12 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var replace = require('replace');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
+var replaceFiles = ['./www/js/app.js'];
 
 gulp.task('default', ['sass']);
 
@@ -30,6 +32,26 @@ gulp.task('sass', function(done) {
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
+
+gulp.task('add-proxy', function() {
+    return replace({
+        regex: "http://localhost:3000/api/endpoint",
+        replacement: "http://localhost:8100/api/endpoint",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+})
+
+gulp.task('remove-proxy', function() {
+    return replace({
+        regex: "http://localhost:8100/api/endpoint",
+        replacement: "http://localhost:3000/api/endpoint",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+})
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
